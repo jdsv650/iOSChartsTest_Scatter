@@ -1,0 +1,12 @@
+project '/Users/James/Desktop/xcode10Projects/TESTCharts/TESTCharts.xcodeproj'
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '10.0'
+
+target "TESTCharts" do
+pod 'Alamofire'
+pod 'Charts'
+end
+
+use_frameworks!
+
