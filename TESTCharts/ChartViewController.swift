@@ -132,13 +132,13 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         dataSet1.setScatterShape(.circle)
         //dataSet1.setColors(UIColor.red)
         dataSet1.setColors(colors1, alpha: 1.0)
-        dataSet1.scatterShapeSize = 5
+        dataSet1.scatterShapeSize = 4   // 5
         
         let dataSet2 = ScatterChartDataSet(values: dataArray2, label: "set2")
         
-        dataSet2.setScatterShape(.square)
+        dataSet2.setScatterShape(.circle)  // .square ....
         dataSet2.setColors(colors2, alpha: 1.0)
-        dataSet2.scatterShapeSize = 5
+        dataSet2.scatterShapeSize = 4
         //dataSet2.scatterShapeHoleRadius = 2
         //dataSet2.scatterShapeHoleColor = UIColor.black
         
