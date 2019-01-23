@@ -17,15 +17,18 @@ class AxisValueFormatter: IAxisValueFormatter {
         // "value" represents the position of the label on the axis (x or y)
         
         let posAsInt = Int(value)
-        print("posASInt = \(posAsInt)")
-        return "\(posAsInt)"
-       // return ""
+        
+        if posAsInt == -1440
+        {
+            return "HEYNOW!!!!"
+        }
       
+        return ""
     }
     
     init(values :[String])
     {
-        mValues = values
+        
     }
     
 }

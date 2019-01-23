@@ -19,6 +19,7 @@
 		1ABE59FD21F7A77A00D667EB /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE59FC21F7A77A00D667EB /* Sensor.swift */; };
 		1ABE59FF21F7A7AA00D667EB /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE59FE21F7A7AA00D667EB /* Constant.swift */; };
 		1ABE5A0121F7A7E600D667EB /* Bar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE5A0021F7A7E600D667EB /* Bar.swift */; };
+		1ABE5A0321F815DA00D667EB /* YAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE5A0221F815DA00D667EB /* YAxisValueFormatter.swift */; };
 		B991E1D8FFC58C926921F7C8 /* Pods_TESTCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D54F426B52DE5834403600F5 /* Pods_TESTCharts.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		1ABE59FC21F7A77A00D667EB /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Sensor.swift; path = ../../../../../james/Desktop/xcode10Projects/TESTCharts/TESTCharts/Sensor.swift; sourceTree = "<group>"; };
 		1ABE59FE21F7A7AA00D667EB /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constant.swift; path = ../../../../../james/Desktop/xcode10Projects/TESTCharts/TESTCharts/Constant.swift; sourceTree = "<group>"; };
 		1ABE5A0021F7A7E600D667EB /* Bar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Bar.swift; path = ../../../../../james/Desktop/xcode10Projects/TESTCharts/TESTCharts/Bar.swift; sourceTree = "<group>"; };
+		1ABE5A0221F815DA00D667EB /* YAxisValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = YAxisValueFormatter.swift; path = ../../../../../james/Desktop/xcode10Projects/TESTCharts/TESTCharts/YAxisValueFormatter.swift; sourceTree = "<group>"; };
 		700ED951965DB877DEE88F27 /* Pods-TESTCharts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TESTCharts.debug.xcconfig"; path = "../../../../james/Desktop/xcode10Projects/TESTCharts/TESTCharts/Pods/Target Support Files/Pods-TESTCharts/Pods-TESTCharts.debug.xcconfig"; sourceTree = "<group>"; };
 		D54F426B52DE5834403600F5 /* Pods_TESTCharts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TESTCharts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -75,8 +77,9 @@
 		1A5EB40F21F78B18008BB0C7 /* TESTCharts */ = {
 			isa = PBXGroup;
 			children = (
-				1A5EB42421F78C04008BB0C7 /* AxisValueFormatter.swift */,
 				1A5EB42521F78C04008BB0C7 /* DataPoint.swift */,
+				1A5EB42421F78C04008BB0C7 /* AxisValueFormatter.swift */,
+				1ABE5A0221F815DA00D667EB /* YAxisValueFormatter.swift */,
 				1A5EB42621F78C04008BB0C7 /* DataValueFormatter.swift */,
 				1A5EB41021F78B18008BB0C7 /* AppDelegate.swift */,
 				1A5EB41421F78B18008BB0C7 /* Main.storyboard */,
@@ -235,6 +238,7 @@
 				1ABE59FF21F7A7AA00D667EB /* Constant.swift in Sources */,
 				1ABE5A0121F7A7E600D667EB /* Bar.swift in Sources */,
 				1A5EB42721F78C04008BB0C7 /* AxisValueFormatter.swift in Sources */,
+				1ABE5A0321F815DA00D667EB /* YAxisValueFormatter.swift in Sources */,
 				1ABE59FD21F7A77A00D667EB /* Sensor.swift in Sources */,
 				1A5EB42821F78C04008BB0C7 /* DataPoint.swift in Sources */,
 				1A5EB42921F78C04008BB0C7 /* DataValueFormatter.swift in Sources */,

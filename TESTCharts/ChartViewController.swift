@@ -20,36 +20,44 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         super.viewDidLoad()
         
         scatterChartView.delegate = self
-        
         mockData()
     }
-    
     
     func mockData()
     {
         graphData()
     }
-    
 
-    
     func graphData()
     {
         let maxItems = 1440
         
+        
         // create and place chart descrioption
-        scatterChartView.chartDescription?.text = "Scatter chart TEST"
+      //  scatterChartView.chartDescription?.text = "Scatter chart TEST"
         scatterChartView.chartDescription?.textAlign = .center
         scatterChartView.chartDescription?.textColor = UIColor.black
         scatterChartView.chartDescription?.font = UIFont.systemFont(ofSize: 14.0, weight: UIFont.Weight.semibold)
         let frame = self.view.frame
         let topLeft = CGPoint(x: (frame.minX+frame.maxX / 2), y: frame.minY)
-        scatterChartView.chartDescription?.position = topLeft
+        //  scatterChartView.chartDescription?.position = topLeft
         
         // misc chart settings
-        scatterChartView.legend.enabled = false
+        scatterChartView.legend.enabled = true
+        scatterChartView.legend.textColor  = UIColor.red
+        
+        let le1 = LegendEntry(label: "label1", form: .circle, formSize: 10, formLineWidth: 10, formLineDashPhase: 10, formLineDashLengths: [10], formColor: UIColor.yellow)
+        let le2 = LegendEntry(label: "label2", form: .circle, formSize: 10, formLineWidth: 10, formLineDashPhase: 10, formLineDashLengths: [10], formColor: UIColor.blue)
+        let le3 = LegendEntry(label: "label3", form: .circle, formSize: 10, formLineWidth: 10, formLineDashPhase: 10, formLineDashLengths: [10], formColor: UIColor.red)
+        let le4 = LegendEntry(label: "label4", form: .circle, formSize: 10, formLineWidth: 10, formLineDashPhase: 10, formLineDashLengths: [10], formColor: UIColor.green)
+            
+        scatterChartView.legend.setCustom(entries: [le1, le2, le3, le4])
+        //setCustom(int[] colors, String[] labels)
+
         scatterChartView.backgroundColor = UIColor.white
         scatterChartView.borderColor = UIColor.black
-        //ChartView.drawGridBackgroundEnabled = true
+    
+        //scatterChartView.drawGridBackgroundEnabled = true
         
         var dataArray1 = [ChartDataEntry]()
         var dataArray2 = [ChartDataEntry]()
@@ -64,7 +72,7 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         
         for i in (0...maxItems)
         {
-            let point = ChartDataEntry(x: Double(i)-1440, y: Double(arc4random() % 200) + 30)
+            let point = ChartDataEntry(x: Double(i)-1440, y: Double(arc4random() % 170) + 30)
             dataArray1.append(point)
             
             let randColorNum = arc4random() % 4
@@ -95,7 +103,7 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         
         for i in (0...maxItems)
         {
-            let point = ChartDataEntry(x: Double(i)-1440, y: Double(arc4random() % 200) + 30)
+            let point = ChartDataEntry(x: Double(i)-1440, y: Double(arc4random() % 170) + 30)
             dataArray2.append(point)
             
             let randColorNum = arc4random() % 4
@@ -141,14 +149,12 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         let data = ScatterChartData(dataSets: dataSets)
         
         scatterChartView.xAxis.labelPosition = .bottom
-        scatterChartView.rightAxis.enabled = true
-        
+     //   scatterChartView.rightAxis.enabled = true
+
         scatterChartView.data = data
         
         
         var xAxisLabels = [String]()
-        
-        
    
         for i in  0...maxItems  {
               print("i = \(i)")
@@ -159,7 +165,7 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         // show labels on x axis from our data set
         let xAxis = scatterChartView.xAxis
         
-        xAxis.granularity = 240   // less than 200 just display 200 interval
+        xAxis.granularity = 240   // 4 hr - less than 200 just display 200 interval
         xAxis.labelPosition = .bottom
         xAxis.labelTextColor = UIColor.black
         xAxis.drawLabelsEnabled = true
@@ -169,23 +175,25 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         xAxis.axisMinimum = -1440
         xAxis.axisMaximum  = 0
         
-        //xAxis.valueFormatter = AxisValueFormatter(values: xAxisLabels)
-        
+      //  xAxis.valueFormatter = AxisValueFormatter(values: [])
      
-        
-     
-       // xAxis.granularity = 150
         
         // set min/max values for chart y-axis
         // for Daily Run Time set min-max to 0-100
         var yAxis = scatterChartView.getAxis(.left)
-        yAxis.axisMaximum = 200
+        
+        yAxis.labelCount = 6
+        yAxis.granularity = 1
+        yAxis.valueFormatter = YAxisValueFormatter(values: [])
+        
+       // yAxis.axisMaximum = 210
         yAxis.axisMinimum = 30
         
-        yAxis = scatterChartView.getAxis(.right)
-        yAxis.axisMaximum = 200
-        yAxis.axisMinimum = 30
         
+        scatterChartView.getAxis(.right).enabled = false
+       // yAxis = scatterChartView.getAxis(.right)
+        //yAxis.axisMaximum = 200
+       // yAxis.axisMinimum = 30
         
         scatterChartView.notifyDataSetChanged()
         
@@ -259,60 +267,7 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         // refresh chart
         barChartView.notifyDataSetChanged()
     }
-    
-    // grab bar data to display in graph
-    func populateBars(theSensor :Sensor) -> [Bar]
-    {
-        var barsRead = [Bar]()
-        
-        if theSensor.date1 != nil && theSensor.runT1 != nil  // must have both
-        {
-            let bar = Bar(label: theSensor.date1!, value: Double(theSensor.runT1!))
-            barsRead.append(bar)
-        }
-        
-        if theSensor.date2 != nil && theSensor.runT2 != nil  // must have both
-        {
-            let bar = Bar(label: theSensor.date2!, value: Double(theSensor.runT2!))
-            barsRead.append(bar)
-        }
-        
-        if theSensor.date3 != nil && theSensor.runT3 != nil  // must have both
-        {
-            let bar = Bar(label: theSensor.date3!, value: Double(theSensor.runT3!))
-            barsRead.append(bar)
-        }
-        
-        if theSensor.date4 != nil && theSensor.runT4 != nil  // must have both
-        {
-            let bar = Bar(label: theSensor.date4!, value: Double(theSensor.runT4!))
-            barsRead.append(bar)
-        }
-        
-        if theSensor.date5 != nil && theSensor.runT5 != nil  // must have both
-        {
-            let bar = Bar(label: theSensor.date5!, value: Double(theSensor.runT5!))
-            barsRead.append(bar)
-        }
-        
-        if theSensor.date6 != nil && theSensor.runT6 != nil  // must have both
-        {
-            let bar = Bar(label: theSensor.date6!, value: Double(theSensor.runT6!))
-            barsRead.append(bar)
-        }
-        
-        if theSensor.date7 != nil && theSensor.runT7 != nil  // must have both
-        {
-            let bar = Bar(label: theSensor.date7!, value: Double(theSensor.runT7!))
-            barsRead.append(bar)
-        }
-        
-        return barsRead
-    }
-
-    ***/
-    
-    
+  ***/
     
     func showInfoMessage(_ title: String, theMessage: String)
     {
