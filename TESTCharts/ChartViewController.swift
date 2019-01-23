@@ -34,6 +34,8 @@ class ChartViewController: UIViewController, ChartViewDelegate {
     
     func graphData()
     {
+        let maxItems = 1440
+        
         // create and place chart descrioption
         scatterChartView.chartDescription?.text = "Scatter chart TEST"
         scatterChartView.chartDescription?.textAlign = .center
@@ -60,9 +62,9 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         var colors1 = [UIColor]() //1440
         var colors2 = [UIColor]() //1440
         
-        for i in (0...1440-1)
+        for i in (0...maxItems)
         {
-            let point = ChartDataEntry(x: Double(i), y: Double(arc4random() % 200) + 30)
+            let point = ChartDataEntry(x: Double(i)-1440, y: Double(arc4random() % 200) + 30)
             dataArray1.append(point)
             
             let randColorNum = arc4random() % 4
@@ -91,9 +93,9 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         // dataArray2.append(p3)
         // dataArray2.append(p4)
         
-        for i in (0...1440-1)
+        for i in (0...maxItems)
         {
-            let point = ChartDataEntry(x: Double(i), y: Double(arc4random() % 200) + 30)
+            let point = ChartDataEntry(x: Double(i)-1440, y: Double(arc4random() % 200) + 30)
             dataArray2.append(point)
             
             let randColorNum = arc4random() % 4
@@ -146,21 +148,33 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         
         var xAxisLabels = [String]()
         
-        for i in  0...dataArray1.count-1   {
-            print("i = \(i)")
-            xAxisLabels.append("\(i+1)")
+        
+   
+        for i in  0...maxItems  {
+              print("i = \(i)")
+          //    xAxisLabels.append("\(i+1-1440)")
         }
         
+   
         // show labels on x axis from our data set
         let xAxis = scatterChartView.xAxis
         
+        xAxis.granularity = 240   // less than 200 just display 200 interval
         xAxis.labelPosition = .bottom
         xAxis.labelTextColor = UIColor.black
         xAxis.drawLabelsEnabled = true
         xAxis.drawAxisLineEnabled = true
         xAxis.drawGridLinesEnabled = true
-        xAxis.granularity = 1
-        xAxis.valueFormatter = AxisValueFormatter(values: xAxisLabels)
+       
+        xAxis.axisMinimum = -1440
+        xAxis.axisMaximum  = 0
+        
+        //xAxis.valueFormatter = AxisValueFormatter(values: xAxisLabels)
+        
+     
+        
+     
+       // xAxis.granularity = 150
         
         // set min/max values for chart y-axis
         // for Daily Run Time set min-max to 0-100
