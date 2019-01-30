@@ -19,9 +19,13 @@ class ChartViewController: UIViewController, ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+      //  let value = UIInterfaceOrientation.landscapeLeft.rawValue
+        //UIDevice.current.setValue(value, forKey: "orientation")
+        
         scatterChartView.delegate = self
         mockData()
     }
+    
     
     func mockData()
     {
@@ -30,7 +34,7 @@ class ChartViewController: UIViewController, ChartViewDelegate {
 
     func graphData()
     {
-        let maxItems = 1440
+        let maxItems = 2880
         
         
         // create and place chart descrioption
@@ -72,7 +76,7 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         
         for i in (0...maxItems)
         {
-            let point = ChartDataEntry(x: Double(i)-1440, y: Double(arc4random() % 170) + 30)
+            let point = ChartDataEntry(x: Double(i), y: Double(arc4random() % 170) + 30)
             dataArray1.append(point)
             
             let randColorNum = arc4random() % 4
@@ -103,7 +107,7 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         
         for i in (0...maxItems)
         {
-            let point = ChartDataEntry(x: Double(i)-1440, y: Double(arc4random() % 170) + 30)
+            let point = ChartDataEntry(x: Double(i), y: Double(arc4random() % 170) + 30)
             dataArray2.append(point)
             
             let randColorNum = arc4random() % 4
@@ -156,26 +160,38 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         
         var xAxisLabels = [String]()
    
-        for i in  0...maxItems  {
+        for i in  0...7 {
               print("i = \(i)")
-          //    xAxisLabels.append("\(i+1-1440)")
+              xAxisLabels.append("\(i+1*240)")
         }
         
    
         // show labels on x axis from our data set
         let xAxis = scatterChartView.xAxis
         
-        xAxis.granularity = 240   // 4 hr - less than 200 just display 200 interval
+        xAxis.labelCount = 14
+        xAxis.granularityEnabled = true
+        xAxis.granularity = 240
         xAxis.labelPosition = .bottom
         xAxis.labelTextColor = UIColor.black
         xAxis.drawLabelsEnabled = true
         xAxis.drawAxisLineEnabled = true
         xAxis.drawGridLinesEnabled = true
-       
-        xAxis.axisMinimum = -1440
-        xAxis.axisMaximum  = 0
         
-      //  xAxis.valueFormatter = AxisValueFormatter(values: [])
+        /***
+        xAxis.labelCount = 7
+        xAxis.granularityEnabled = true
+        xAxis.granularity = 480
+        xAxis.labelPosition = .bottom
+        xAxis.labelTextColor = UIColor.black
+        xAxis.drawLabelsEnabled = true
+        xAxis.drawAxisLineEnabled = true
+        xAxis.drawGridLinesEnabled = true  ***/
+
+        xAxis.axisMinimum = 0
+        xAxis.axisMaximum = Double(maxItems)
+        
+        xAxis.valueFormatter = AxisValueFormatter(values: xAxisLabels)
      
         
         // set min/max values for chart y-axis
@@ -285,7 +301,51 @@ class ChartViewController: UIViewController, ChartViewDelegate {
     }
     
     
+    
+    //MARK: - Device Orientation
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .landscape
+    }
+    
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .landscapeLeft
+    }
+    
+    
 }
 
 
+extension UINavigationController {
+    
+    override open var shouldAutorotate: Bool {
+        get {
+            if let visibleVC = visibleViewController {
+                return visibleVC.shouldAutorotate
+            }
+            return super.shouldAutorotate
+        }
+    }
+    
+    override open var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation{
+        get {
+            if let visibleVC = visibleViewController {
+                return visibleVC.preferredInterfaceOrientationForPresentation
+            }
+            return super.preferredInterfaceOrientationForPresentation
+        }
+    }
+    
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask{
+        get {
+            if let visibleVC = visibleViewController {
+                return visibleVC.supportedInterfaceOrientations
+            }
+            return super.supportedInterfaceOrientations
+        }
+    }
+}
 
