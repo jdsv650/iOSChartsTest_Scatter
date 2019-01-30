@@ -19,7 +19,7 @@ class AxisValueFormatter: IAxisValueFormatter {
         let posAsInt = Int(value)
       
        // return "\(mValues[posAsInt]) ?"
-        if posAsInt == 0 || posAsInt == 720 || posAsInt == 1440 || posAsInt == 2160 || posAsInt == 2880
+        if posAsInt == 0 || posAsInt == -720 || posAsInt == -1440 || posAsInt == -2160 || posAsInt == -2880
         {
              return "\(posAsInt)"
         }
@@ -28,7 +28,6 @@ class AxisValueFormatter: IAxisValueFormatter {
     }
     
   
-    
     init(values :[String])
     {
         

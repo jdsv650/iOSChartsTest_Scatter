@@ -76,7 +76,7 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         
         for i in (0...maxItems)
         {
-            let point = ChartDataEntry(x: Double(i), y: Double(arc4random() % 170) + 30)
+            let point = ChartDataEntry(x: Double(i)-Double(maxItems), y: Double(arc4random() % 170) + 30)
             dataArray1.append(point)
             
             let randColorNum = arc4random() % 4
@@ -157,14 +157,7 @@ class ChartViewController: UIViewController, ChartViewDelegate {
 
         scatterChartView.data = data
         
-        
-        var xAxisLabels = [String]()
-   
-        for i in  0...7 {
-              print("i = \(i)")
-              xAxisLabels.append("\(i+1*240)")
-        }
-        
+       // var xAxisLabels = [String]()
    
         // show labels on x axis from our data set
         let xAxis = scatterChartView.xAxis
@@ -188,10 +181,10 @@ class ChartViewController: UIViewController, ChartViewDelegate {
         xAxis.drawAxisLineEnabled = true
         xAxis.drawGridLinesEnabled = true  ***/
 
-        xAxis.axisMinimum = 0
-        xAxis.axisMaximum = Double(maxItems)
+        xAxis.axisMinimum = Double(-maxItems)
+        xAxis.axisMaximum = 0
         
-        xAxis.valueFormatter = AxisValueFormatter(values: xAxisLabels)
+        xAxis.valueFormatter = AxisValueFormatter(values: [])
      
         
         // set min/max values for chart y-axis
